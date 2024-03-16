@@ -5,8 +5,8 @@ import csv
 problem_dict = {}
 
 # 打开JSON文件并使用ijson进行解析
-with open('data/student-problem-middle.json', 'r') as json_file, open('problem.json', 'r') as problem_json_file:
-# with open('student-problem-coarse.json', 'r') as json_file, open('problem.json', 'r') as problem_json_file:
+with open('data/student-problem-middle.json', 'r') as json_file, open('data/problem.json', 'r') as problem_json_file:
+# with open('data/student-problem-coarse.json', 'r') as json_file, open('data/problem.json', 'r') as problem_json_file:
     parser = ijson.parse(json_file)
     for line in problem_json_file:
         try:
@@ -20,7 +20,7 @@ with open('data/student-problem-middle.json', 'r') as json_file, open('problem.j
     is_correct = None
     cognitive_dimension = None
     # 创建一个TSV文件来写入数据
-    with open('student-problem-middle.csv', 'w', newline='') as csv_file:
+    with open('output/student-problem-middle.csv', 'w', newline='') as csv_file:
     # with open('student-problem-coarse.csv', 'w', newline='') as csv_file:
         fieldnames = ['num', 'student', 'skill', 'right', 'cognitive_level']
         csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter=',')
