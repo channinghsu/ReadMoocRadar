@@ -5,7 +5,7 @@ import csv
 problem_dict = {}
 
 # 打开JSON文件并使用ijson进行解析
-with open('student-problem-middle.json', 'r') as json_file, open('problem.json', 'r') as problem_json_file:
+with open('data/student-problem-middle.json', 'r') as json_file, open('problem.json', 'r') as problem_json_file:
 # with open('student-problem-coarse.json', 'r') as json_file, open('problem.json', 'r') as problem_json_file:
     parser = ijson.parse(json_file)
     for line in problem_json_file:
