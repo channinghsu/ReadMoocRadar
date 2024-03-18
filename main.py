@@ -5,8 +5,8 @@ import csv
 problem_dict = {}
 
 # 打开JSON文件并使用ijson进行解析
-with open('data/student-problem-middle.json', 'r') as json_file, open('data/problem.json', 'r') as problem_json_file:
-# with open('data/student-problem-coarse.json', 'r') as json_file, open('data/problem.json', 'r') as problem_json_file:
+# with open('student-problem-middle.json', 'r') as json_file, open('data/problem.json', 'r', encoding='utf-8') as problem_json_file:
+with open('student-problem-coarse.json', 'r') as json_file, open('data/problem.json', 'r', encoding='utf-8') as problem_json_file:
     parser = ijson.parse(json_file)
     for line in problem_json_file:
         try:
@@ -20,9 +20,9 @@ with open('data/student-problem-middle.json', 'r') as json_file, open('data/prob
     is_correct = None
     cognitive_dimension = None
     # 创建一个TSV文件来写入数据
-    with open('output/student-problem-middle.csv', 'w', newline='') as csv_file:
-    # with open('student-problem-coarse.csv', 'w', newline='') as csv_file:
-        fieldnames = ['num', 'student', 'skill', 'right', 'cognitive_level']
+    # with open('output/student-problem-middle.csv', 'w', newline='') as csv_file:
+    with open('output/student-problem-coarse.csv', 'w', newline='') as csv_file:
+        fieldnames = ['num', 'user_id', 'problem_id', 'skill_id', 'is_correct', 'cognitive_label']
         csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames, delimiter=',')
         csv_writer.writeheader()
         num = 1
@@ -39,9 +39,9 @@ with open('data/student-problem-middle.json', 'r') as json_file, open('data/prob
                 cognitive_dimension = problem_dict.get(problem_id)
 
             # 当所有字段都准备好时，写入到TSV文件
-            if user_id is not None and skill_id is not None and is_correct is not None and cognitive_dimension is not None:
+            if user_id is not None and problem_id is not None and skill_id is not None and is_correct is not None and cognitive_dimension is not None:
                 # 写入数据到TSV文件
-                csv_writer.writerow({'num': num, 'student': user_id, 'skill': skill_id, 'right': is_correct, 'cognitive_level': cognitive_dimension})
+                csv_writer.writerow({'num': num, 'user_id': user_id,'problem_id':problem_id, 'skill_id': skill_id, 'is_correct': is_correct, 'cognitive_label': cognitive_dimension})
 
                 # 重置字段值以准备下一个记录
                 user_id = None
